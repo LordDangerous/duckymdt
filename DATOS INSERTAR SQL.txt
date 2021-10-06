@@ -1,5 +1,0 @@
-- INSERTAR COLUMNA PELIGROSIDAD
-- INSERTAR TABLA mdt_profile (id, identifier, notes, mugshot_url)
-- INSERTAR TABLA mdt_fines (id, identifier, charge, amount)
-- INSERTAR TABLA fine_types (id, label, amount, jailtime)
-- INSERTAR TABLE mdt_notes (id, identifier, note, agent, date)
