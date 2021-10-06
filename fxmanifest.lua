@@ -25,7 +25,7 @@ ui_page '/html/index.html'
 files {
     'html/index.html',
     'html/index.css',
-    'html/vue.js',
+    'html/vue.min.js',
     'html/app.js',
     'html/imgs/logopolice.png',
     'html/imgs/pda.png',

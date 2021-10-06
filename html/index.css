@@ -1,0 +1,764 @@
+@font-face {
+    font-family: barlow-condensed;
+    src: url('fonts/BarlowCondensed-Medium.ttf');
+}
+
+.body {
+    background: none;
+}
+
+#container {
+    border-radius: 10px;
+    height: 680px;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 70%;
+    position: fixed;
+    width: 305px;
+    /*display: none;*/
+}
+
+.pdaborder {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+}
+
+.content {
+    background-color: #222831;
+    /*margin-left: 8.5%;
+    margin-right: 5%;*/
+    margin: auto;
+    margin-top: 35.4px;
+    width: 84%;
+    height: 67.9%;
+    border-radius: 10px;
+    align-content: center;
+}
+
+
+/* --------------   HOME SCREEN  ----------------- */
+
+
+
+.logopolice {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    top: 15%;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.info {
+    position: relative;
+    top: 300px;
+    left: 27px;
+    right: 0;
+    margin: auto;
+}
+
+.name {
+    font-family: barlow-condensed;
+    font-size: 17px;
+    text-align: center;
+    background-color: inherit;
+    color: #FFFFFF;
+    border-style: solid;
+    border-color: #8b96a3;
+    width: 130px;
+}
+
+#searchname {
+    font-family: barlow-condensed;
+    font-size: 17px;
+    border: none;
+    height: 26px;
+    color: #FFFFFF;
+    width: 70px;
+    background-color: #0b151e;
+}
+
+.plate {
+    font-family: barlow-condensed;
+    font-size: 17px;
+    text-align: center;
+    background-color: inherit;
+    color: #FFFFFF;
+    border-style: solid;
+    border-color: #8b96a3;
+    width: 130px;
+    margin-top: 15px;
+}
+
+#searchplate {
+    font-family: barlow-condensed;
+    font-size: 17px;
+    border: none;
+    height: 26px;
+    color: #FFFFFF;
+    width: 70px;
+    background-color: #0b151e;
+}
+
+
+/* ---------------- SEARCH COINCIDENCES ------------------ */
+
+
+
+#title {
+    position: relative;
+    width: 99%;
+    height: 30px;
+    line-height: 15px;
+    top: 3px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+#goback {
+    display: inline-block;
+    width: 10px;
+    height: 20px;
+    margin-left: 15px;
+    margin-bottom: -4px;
+}
+
+#title p {
+    margin-left: 25px;
+    display: inline-block;
+    font-family: barlow-condensed;
+    color: #FFFFFF;
+    font-size: 20px;
+}
+
+#title hr {
+    margin-top: -5px;
+    width: 100%;
+    border-style: solid;
+    border-color: black;
+    border-width: 2px 0 0 0;
+    margin-left: 1px;
+}
+
+.coincidences {
+    position: relative;
+    width: 80%;
+    height: 77%;
+    margin: auto;
+    top: 30px;
+    overflow: scroll;
+}
+
+.coincidences::-webkit-scrollbar {
+    display: none;
+}
+
+#coincidence {
+    margin-top: 10px;
+    font-family: barlow-condensed;
+    padding-left: 10px;
+    line-height: 8px;
+    border-style: solid;
+    border-width: 2px;
+    background-color: #0b151e;
+}
+
+#coincidence p {
+    position: relative;
+    color: #FFFFFF;
+}
+
+#coincidencesfooter {
+    position: relative;
+    border-top: solid;
+    border-width: 2px 0 0 0;
+    line-height: 43px;
+    height: 40px;
+    width: 96%;
+    margin-left: 8px;
+    margin-top: 33px;
+    bottom: 0;
+    text-align: center;
+}
+
+/* ---------------- SEARCH VEHICLE ------------------ */
+
+
+
+#vehiclecoincidencesfooter {
+    position: relative;
+    border-top: solid;
+    border-width: 2px 0 0 0;
+    line-height: 43px;
+    height: 40px;
+    width: 96%;
+    margin-left: 8px;
+    margin-top: 33px;
+    bottom: 0;
+    text-align: center;
+}
+
+.plateinside {
+    font-family: barlow-condensed;
+    font-size: 17px;
+    text-align: center;
+    background-color: inherit;
+    color: #FFFFFF;
+    border-style: solid;
+    border-color: #8b96a3;
+    width: 130px;
+    margin-top: 8px;
+}
+
+#vehiclenotfound {
+    font-family: barlow-condensed;
+    font-size: 17px;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+
+/* ---------------- PERSON DATASHEET ------------------ */
+
+
+#mugshotcontainer {
+    position: relative;
+    width: 80%;
+    height: 28%;
+    top: 30px;
+    margin: auto;
+}
+
+#gobackdatasheet {
+    position: absolute;
+    width: 8px;
+    height: 13px;
+    margin-left: 10px;
+    margin-top: 17px;
+}
+
+#mugshotphoto {
+    width: 100%;
+    height: auto;
+}
+
+
+/* -------------------------- COLLAPSIBLE -------------------------- */
+
+#riskinessbutton {
+    position: relative;
+    font-family: barlow-condensed;
+    font-size: 11px;
+    border: none;
+    height: 20px;
+    line-height: 2px;
+    color: #FFFFFF;
+    width: 80px;
+    background-color: #0b151e;
+    text-align: center;
+    margin-bottom: 2px;
+}
+
+input[type='checkbox'] { 
+    display: none; 
+} 
+
+.wrap-collabsible { 
+    margin: 1.2rem 0; 
+} 
+
+.lbl-toggle { 
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 12%;
+    left: 19%; 
+    font-family: barlow-condensed; 
+    font-size: 11px;   
+    border: none;
+    height: 21px;
+    line-height: 19px;
+    text-align: center;
+    color: #FFFFFF;
+    width: 80px;    
+    transition: all 0.25s ease-out; 
+}
+
+.lbl-toggle::before { 
+    content: ' '; 
+    display: inline-block;
+    vertical-align: middle; 
+    transition: transform .2s ease-out; 
+} 
+
+.collapsible-content { 
+    max-height: 0px; 
+    overflow: hidden; 
+    transition: max-height .25s ease-in-out; 
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 48%;
+    left: 19%;
+    width: 80px;
+} 
+
+.toggle:checked + .lbl-toggle + .collapsible-content { 
+    max-height: fit-content; 
+}
+
+/*   -----------------------------------------------------   */
+
+#changemugshot {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: barlow-condensed;
+    font-size: 11px;
+    border: none;
+    height: 21px;
+    color: #FFFFFF;
+    width: 90px;
+    background-color: #0b151e;
+}
+
+#datasheetcontainer {
+    position: relative;
+    margin: auto;
+    top: 62px;
+    width: 85%;
+}
+
+#datasheet {
+    width: 50%;
+    float: left;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    line-height: 5px;
+    height: 48%;
+}
+
+#datasheet::-webkit-scrollbar {
+    width: 5px;
+}
+
+#datasheet::-webkit-scrollbar-track {
+    background: unset;
+}
+
+#datasheet::-webkit-scrollbar-thumb {
+    background: #0b151e;
+}
+
+#datasheettitle {
+    font-family: barlow-condensed;
+    color: #FFFFFF;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+#datasheettext {
+    font-family: barlow-condensed;
+    color: #FFFFFF;
+    font-size: 12px;
+    margin-top: 0px;
+    margin-bottom: 25px;
+}
+
+#datasheetverticalline {
+    display: inline-block;
+    border-left: 2px solid #0b151e;
+    margin-top: 2px;
+    height: 47%;
+    left: 50%;
+}
+
+#licensescontainer {
+    margin-bottom: 20px;
+    line-height: 2px;
+}
+
+#licencetext {
+    display: inline-block;
+    font-family: barlow-condensed;
+    color: #FFFFFF;
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+}
+
+#licencetextbutton {
+    display: inline-block;
+    vertical-align: middle;
+    font-family: barlow-condensed;
+    color: #8b96a3;
+    font-size: 10px;
+    margin: 0;
+    padding: 0;
+}
+
+#vehiclelist {
+    font-family: barlow-condensed;
+    color: #FFFFFF;
+    font-size: 12px;
+    margin-bottom: 25px;
+}
+
+#bills {
+    width: 42%;
+    float: right;
+    line-height: 12px;
+    overflow: scroll;
+    height: 48%;
+}
+
+#bills::-webkit-scrollbar {
+    display: none;
+}
+
+#billtitle {
+    font-family: barlow-condensed;
+    color: #FFFFFF;
+    font-size: 12px;
+    margin-top: 0px;
+    width: 42%;
+}
+
+#billtext {
+    display: inline-block;
+    font-family: barlow-condensed;
+    color: #FFFFFF;
+    font-size: 12px;
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+
+#billtextbutton {
+    display: inline-block;
+    vertical-align: top;
+    font-family: barlow-condensed;
+    color: #8b96a3;
+    font-size: 13px;
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+
+#datasheetfooter {
+    position: fixed;
+    left: 8%;
+    bottom: 185px;
+    color: #000d18;
+    border-top: solid;
+    border-width: 2px 0 0 0;
+    line-height: 35px;
+    height: 30px;
+    width: 80.3%;
+    margin-left: 8px;
+    background-color: #000d18;
+}
+
+#addbillbutton {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    font-family: barlow-condensed;
+    color: #8b96a3;
+    font-size: 13px;
+    margin-top: 5px;
+    text-align: right;
+    padding-right: 15px;
+    background-color: unset;
+    border: none;
+    width: 46.5%;
+}
+
+#addNote {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    font-family: barlow-condensed;
+    color: #8b96a3;
+    font-size: 13px;
+    margin-top: 5px;
+    text-align: left;
+    padding-left: 15px;
+    background-color: unset;
+    border: none;
+    width: 44%;
+}
+
+.verticalline {
+    display: inline-block;
+    border-left: 2px solid #8b96a3;
+    margin-top: 2px;
+    height: 25px;
+    left: 50%;
+}
+
+
+
+/* ---------------- LOADING SCREEN --------------- */
+
+#loadingcontainer {
+    position: relative;
+    height: 460px;
+    width: 100%;
+    text-align: center;
+    line-height: 460px;
+}
+
+#loading {
+    padding-left: 10px;
+    font-family: barlow-condensed;
+    font-size: 35px;
+    color: #FFFFFF;    
+}
+
+
+
+/* ---------------- ADD FINES --------------- */
+
+#finescontainer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+#finestitlecontainer {
+    position: relative;
+    margin-top: 40px;
+}
+
+#finespersonname {
+    position: relative;
+    margin-top: 10px;
+    font-family: barlow-condensed;
+    padding-left: 12px;
+    line-height: 8px;
+    position: relative;
+    color: #FFFFFF;
+}
+
+#filterfines {
+    font-family: barlow-condensed;
+    font-size: 17px;
+    text-align: left;
+    background-color: inherit;
+    color: #FFFFFF;
+    border-style: solid;
+    border-color: #8b96a3;
+    width: 90%;
+    margin-left: 12px;
+}
+
+#availablefinestitle {
+    position: relative;
+    width: 97%;
+    height: 10%;
+    font-family: barlow-condensed;
+    font-size: 17px;
+    color: #FFFFFF;
+    margin-left: 5px;
+    border-bottom: 1px solid #000d18;
+}
+
+#availablefinestitle p {
+    position: relative;
+    display: inline-block;
+    padding-right: 60px;
+    margin-left: 5px;
+}
+
+#availablefinescontainer {
+    overflow: scroll;
+    position: relative;
+    width: 97%;
+    height: 63%;
+    margin-left: 5px;
+}
+
+#availablefinescontainer::-webkit-scrollbar {
+    display: none;
+}
+
+#availablefines {
+    border-collapse: collapse;
+    font-family: barlow-condensed;
+    font-size: 17px;
+    color: #FFFFFF;
+    border-bottom: 1px solid #000d18;
+}
+
+#availablefines tr td {
+    padding: 5px;
+    border-bottom: 1px solid #0b151e;
+    height: auto;
+    /*word-break: break-all;*/
+}
+
+#addfinebutton {
+    font-family: barlow-condensed;
+    font-size: 15px;
+    border: none;
+    height: 26px;
+    color: #FFFFFF;
+    width: 50px;
+    background-color: #0b151e;
+}
+
+
+
+/* -------------- NOTES --------------------- */
+
+#notespagecontainer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+#notescontainer {
+    overflow: scroll;
+    position: relative;
+    width: 93%;
+    height: 70%;
+    margin-left: 5px;
+    padding: 5px;
+    text-align: justify;
+}
+
+#notescontainer::-webkit-scrollbar {
+    display: none;
+}
+
+#readnote {
+    border: 2px solid #0b151e;
+    background-color: #fbdd5e;
+    width: 90%;
+    margin: auto;
+    font-family: barlow-condensed;
+    font-size: 15px;
+    line-height: 20px;
+    color: #FFFFFF;
+    padding-left: 5px;
+    padding-right: 15px;
+    margin-bottom: 10px;
+}
+
+#notetitle {
+    margin-top: 1px;
+    margin-bottom: 0px;
+    color: #222831;
+}
+
+#readnote hr {
+    width: 100%;
+    border-style: solid;
+    border-color: #0b151e;
+    border-width: 1px 0 0 0;
+}
+
+#notetext {
+    margin-top: 5px;
+    color: #222831;
+}
+
+#deletenote {
+    position: absolute;
+    margin-left: 208px;
+    margin-top: -21px;
+    font-family: barlow-condensed;
+    font-size: 15px;
+    border: none;
+    height: 19px;
+    color: #222831;
+    width: 20px;
+    background-color: unset;
+}
+
+#notesfooter {
+    position: fixed;
+    left: 8%;
+    bottom: 185px;
+    color: #222831;
+    border-top: solid;
+    border-width: 2px 0 0 0;
+    line-height: 35px;
+    height: 30px;
+    width: 80.3%;
+    margin-left: 8px;
+    text-align: center;
+    background-color: #222831;
+}
+
+#newnote {
+    font-family: barlow-condensed;
+    font-size: 17px;
+    border: none;
+    height: 26px;
+    color: #FFFFFF;
+    width: 95px;
+    background-color: #0b151e;
+}
+
+#createnote {
+    border: 2px solid #0b151e;
+    background-color: #fbdd5e;
+    width: 99%;
+    margin: auto;
+    font-family: barlow-condensed;
+    font-size: 15px;
+    line-height: 20px;
+    color: #222831;
+    margin-bottom: 10px;
+    vertical-align: top;
+    height: 35%;
+    text-align: right;
+}
+
+#noteinput {
+    font-family: barlow-condensed;
+    font-size: 15px;
+    text-align: left;
+    background-color: inherit;
+    vertical-align: top;
+    color: #222831;
+    border: none;
+    width: 100%;
+    height: 70%;
+    outline: none;
+    resize: none;
+    text-align: justify;
+    padding-left: 5px;
+    padding-right: 15px;
+}
+
+#noteinput::placeholder {
+    color: #222831;
+}
+
+#noteinput::-webkit-scrollbar {
+    display: none;
+}
+
+#submitnote {
+    position: relative;
+    font-family: barlow-condensed;
+    font-size: 13px;
+    border: none;
+    height: 19px;
+    color: #222831;
+    line-height: 19px;
+    margin-right: 1px;
+    width: fit-content;
+    background-color: unset;
+}
+
+#createnote hr {
+    width: 99%;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px 0 0 0;
+    margin-top: 1px;
+}

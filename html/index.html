@@ -1,0 +1,285 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <div id="container" class="container">
+
+        <img src="./imgs/pda.png" id="pdaborder" class="pdaborder">
+        <div id="content" class="content">
+            <!-- HOME SCREEN -->
+            <div v-if="page == 'Home'" id="home">
+                <img src="./imgs/logopolice.png" id="logopolice" class="logopolice" />
+                <div id="info" class="info">
+                    <input v-on:keyup.enter="SearchPerson(); ClearForm()" v-model="search_person" type="text" placeholder="NOMBRE" id="name" class="name"></input>
+                    <button v-on:click="SearchPerson(); ClearForm()" id="searchname" type="button">FICHA</button>
+                </div>
+                <div id="info" class="info">
+                    <input v-on:keyup.enter="SearchVehicle(); ClearForm()" v-model="search_vehicle" type="text" placeholder="MATRÍCULA" id="plate" class="plate"></input>
+                    <button v-on:click="SearchVehicle(); ClearForm()" id="searchplate" type="button">VEHÍCULO</button>
+                </div>
+            </div>
+
+
+
+            <!-- SEARCH COINCIDENCES -->
+            <div v-if="page == 'SearchPerson'" id="searchcoincidencescontainer">
+                <div id="title" class="title">
+                    <img v-on:click="ChangePage('Home')" src="./imgs/leftarrow.png" id="goback">
+                    <p>ARCHIVOS POLICIALES</p>
+                    <hr>
+                </div>
+                <div id="coincidences" class="coincidences">
+                    <span v-if="searched_persons.results" v-for="person in searched_persons.results">
+                        <div v-if="person.riskiness == 0" v-bind:style="{ 'background-color': alertLevel0 }" v-on:click="SearchProfile(person.identifier)" id="coincidence">
+                            <p>{{ person.firstname.toUpperCase() }} {{ person.lastname.toUpperCase() }}</p>
+                            <p>OFICIO: {{ person.job.toUpperCase() }}</p>
+                            <p>PELIGROSIDAD: {{ person.riskiness }}</p>
+                        </div>
+                        <div v-if="person.riskiness == 1" v-bind:style="{ 'background-color': alertLevel1 }" v-on:click="SearchProfile(person.identifier)" id="coincidence">
+                            <p>{{ person.firstname.toUpperCase() }} {{ person.lastname.toUpperCase() }}</p>
+                            <p>OFICIO: {{ person.job.toUpperCase() }}</p>
+                            <p>PELIGROSIDAD: {{ person.riskiness }}</p>
+                        </div>
+                        <div v-if="person.riskiness == 2" v-bind:style="{ 'background-color': alertLevel2 }" v-on:click="SearchProfile(person.identifier)" id="coincidence">
+                            <p>{{ person.firstname.toUpperCase() }} {{ person.lastname.toUpperCase() }}</p>
+                            <p>OFICIO: {{ person.job.toUpperCase() }}</p>
+                            <p>PELIGROSIDAD: {{ person.riskiness }}</p>
+                        </div>
+                        <div v-if="person.riskiness == 3" v-bind:style="{ 'background-color': alertLevel3 }" v-on:click="SearchProfile(person.identifier)" id="coincidence">
+                            <p>{{ person.firstname.toUpperCase() }} {{ person.lastname.toUpperCase() }}</p>
+                            <p>OFICIO: {{ person.job.toUpperCase() }}</p>
+                            <p>PELIGROSIDAD: {{ person.riskiness }}</p>
+                        </div>
+                    </span>
+                </div>
+                <div id="coincidencesfooter">
+                    <input v-on:keyup.enter="SearchPerson(); ClearForm()" v-model="search_person" type="text" placeholder="NOMBRE" id="name" class="name"></input>
+                    <button v-on:click="SearchPerson(); ClearForm()" id="searchname" type="button">FICHA</button>
+                </div>
+            </div>
+
+            <!-- SEARCH VEHICLE -->
+            <div v-if="page == 'SearchVehicle'" id="searchvehiclecoincidencescontainer">
+                <div id="title" class="title">
+                    <img v-on:click="ChangePage('Home')" src="./imgs/leftarrow.png" id="goback">
+                    <p>REGISTRO VEHÍCULOS</p>
+                    <hr>
+                </div>
+                <div id="coincidences" class="coincidences">
+                    <span v-if="searched_vehicles.identifier">
+                        <div v-on:click="SearchProfile(searched_vehicles.identifier)" id="coincidence">
+                            <p>PROPIETARIO: {{ searched_vehicles.firstname.toUpperCase() }} {{ searched_vehicles.lastname.toUpperCase() }} </p>
+                            <p>MODELO: {{ searched_vehicles.vehicleModel }}</p>
+                        </div>
+                    </span>
+                    <span v-else-if="searched_vehicles.identifier == null">
+                        <p id="vehiclenotfound">No se ha encontrado el vehículo</p>
+                    </span>
+                </div>
+                <div id="vehiclecoincidencesfooter">
+                    <input v-on:keyup.enter="SearchVehicle(); ClearForm()" v-model="search_vehicle" type="text" placeholder="MATRÍCULA" id="plateinside" class="plateinside"></input>
+                    <button v-on:click="SearchVehicle(); ClearForm()" id="searchplate" type="button">VEHÍCULO</button>
+                </div>
+            </div>
+
+
+            <!-- PERSON DATASHEET -->
+            <div v-if="page == 'PersonDataSheet'" id="persondatasheet">
+                <span v-for="person in selected_person.result">
+                    <img v-on:click="ChangePage('Home')" src="./imgs/leftarrow.png" id="gobackdatasheet">
+                    <div id="mugshotcontainer">
+                        <img :src="person.mugshot_url" id="mugshotphoto">
+                        <div class="wrap-collapsible" v-if="person.riskiness == 0">
+                            <input class="toggle" type="checkbox" id="collapsible">
+                            <label for="collapsible" v-bind:style="{ 'background-color': alertLevel0}" class="lbl-toggle">PELIGROSIDAD: {{ person.riskiness }}</label>
+                            <div id="collapsible-content" class="collapsible-content">
+                                <div class="content-inner">
+                                    <button v-on:click="ChangePage('LoadingScreen'); ChangeRiskiness(person.identifier, 1)" v-bind:style="{ 'background-color': alertLevel1}" id="riskinessbutton">PELIGROSIDAD: 1</button>
+                                    <button v-on:click="ChangePage('LoadingScreen'); ChangeRiskiness(person.identifier, 2)" v-bind:style="{ 'background-color': alertLevel2}" id="riskinessbutton">PELIGROSIDAD: 2</button>
+                                    <button v-on:click="ChangePage('LoadingScreen'); ChangeRiskiness(person.identifier, 3)" v-bind:style="{ 'background-color': alertLevel3}" id="riskinessbutton">PELIGROSIDAD: 3</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="wrap-collapsible" v-if="person.riskiness == 1">
+                            <input class="toggle" type="checkbox" id="collapsible">
+                            <label for="collapsible" v-bind:style="{ 'background-color': alertLevel1}" class="lbl-toggle">PELIGROSIDAD: {{ person.riskiness }}</label>
+                            <div class="collapsible-content">
+                                <div class="content-inner">
+                                    <button v-on:click="ChangePage('LoadingScreen'); ChangeRiskiness(person.identifier, 0)" v-bind:style="{ 'background-color': alertLevel0}" id="riskinessbutton">PELIGROSIDAD: 0</button>
+                                    <button v-on:click="ChangePage('LoadingScreen'); ChangeRiskiness(person.identifier, 2)" v-bind:style="{ 'background-color': alertLevel2}" id="riskinessbutton">PELIGROSIDAD: 2</button>
+                                    <button v-on:click="ChangePage('LoadingScreen'); ChangeRiskiness(person.identifier, 3)" v-bind:style="{ 'background-color': alertLevel3}" id="riskinessbutton">PELIGROSIDAD: 3</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="wrap-collapsible" v-if="person.riskiness == 2">
+                            <input class="toggle" type="checkbox" id="collapsible">
+                            <label for="collapsible" v-bind:style="{ 'background-color': alertLevel2}" class="lbl-toggle">PELIGROSIDAD: {{ person.riskiness }}</label>
+                            <div class="collapsible-content">
+                                <div class="content-inner">
+                                    <button v-on:click="ChangePage('LoadingScreen'); ChangeRiskiness(person.identifier, 0)" v-bind:style="{ 'background-color': alertLevel0}" id="riskinessbutton">PELIGROSIDAD: 0</button>
+                                    <button v-on:click="ChangePage('LoadingScreen'); ChangeRiskiness(person.identifier, 1)" v-bind:style="{ 'background-color': alertLevel1}" id="riskinessbutton">PELIGROSIDAD: 1</button>
+                                    <button v-on:click="ChangePage('LoadingScreen'); ChangeRiskiness(person.identifier, 3)" v-bind:style="{ 'background-color': alertLevel3}" id="riskinessbutton">PELIGROSIDAD: 3</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="wrap-collapsible" v-if="person.riskiness == 3">
+                            <input class="toggle" type="checkbox" id="collapsible">
+                            <label for="collapsible" v-bind:style="{ 'background-color': alertLevel3}" class="lbl-toggle">PELIGROSIDAD: {{ person.riskiness }}</label>
+                            <div class="collapsible-content">
+                                <div class="content-inner">
+                                    <button v-on:click="ChangePage('LoadingScreen'); ChangeRiskiness(person.identifier, 0)" v-bind:style="{ 'background-color': alertLevel0}" id="riskinessbutton">PELIGROSIDAD: 0</button>
+                                    <button v-on:click="ChangePage('LoadingScreen'); ChangeRiskiness(person.identifier, 1)" v-bind:style="{ 'background-color': alertLevel1}" id="riskinessbutton">PELIGROSIDAD: 1</button>
+                                    <button v-on:click="ChangePage('LoadingScreen'); ChangeRiskiness(person.identifier, 2)" v-bind:style="{ 'background-color': alertLevel2}" id="riskinessbutton">PELIGROSIDAD: 2</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button v-on:click="ChangeImage(person.identifier)" id="changemugshot">Actualizar Imagen</button>
+                    <div id="datasheetcontainer">
+                        <div id="datasheet">
+                            <p id="datasheettitle">NOMBRE Y APELLIDOS</p>
+                            <p id="datasheettext">{{ person.firstname }} {{ person.lastname }}</p>
+                            <p id="datasheettitle">FECHA DE NACIMIENTO</p>
+                            <p id="datasheettext">{{ person.dateofbirth }}</p>
+                            <p id="datasheettitle">SEXO</p>
+                            <p id="datasheettext">{{ person.sex }}</p>
+                            <p id="datasheettitle">ALTURA</p>
+                            <p id="datasheettext">{{ person.height }}cm</p>
+                            <p id="datasheettitle">TRABAJO</p>
+                            <p id="datasheettext">{{ person.job }}</p>
+                            <p id="datasheettitle">LICENCIAS</p>
+                            <span v-for="licence in selected_person.licenses">
+                                <div id="licensescontainer">
+                                    <p id="licencetext">{{ licence.label }}</p>
+                                    <p v-on:click="RemoveLicence(person.identifier, licence)" id="licencetextbutton">(-)</p>
+                                </div>
+                            </span>
+                            <p style="margin-top: 25px;" id="datasheettitle">VEHÍCULOS</p>
+                            <span v-for="vehicle in selected_person.vehicleList">
+                                <div id="vehiclelist">
+                                    <p>Matrícula: {{ vehicle.plate }}</p>
+                                    <p>Modelo: {{ vehicle.model }}</p>
+                                </div>
+                            </span>
+                        </div>
+                        
+                        <div id="bills">
+                            <p id="billtitle">ANTECEDENTES</p>
+                            <span v-for="fine in selected_person.fines">
+                                <p id="billtext">{{ fine.charge }} (${{ fine.amount }})</p>
+                                <p v-on:click="ChangePage('LoadingScreen'); RemoveFine(fine)" id="billtextbutton">Eliminar</p>
+                            </span>
+                        </div>                    
+                    </div>
+
+                    <div id="datasheetfooter">
+                        <button v-on:click="RequestAllFines()" id="addbillbutton">AÑADIR MULTA</button>
+                        <div class="verticalline"></div>
+                        <button v-on:click="RequestNotes(person.identifier)" id="addNote">NOTAS</button>
+                    </div>
+                </span>
+            </div>
+
+            
+            <!-- LOADING SCREEN -->
+            <div v-if="page == 'LoadingScreen'" id="loadingscreen">
+                <div id="loadingcontainer">
+                    <p id="loading">CARGANDO...</p>
+                </div>
+            </div>
+
+
+            <!-- ADD FINES -->
+            <div v-if="page == 'Fines'" v-for="person in selected_person.result" id="finescontainer">
+                <div id="title" class="title">
+                    <img v-on:click="SearchProfile(person.identifier)" src="./imgs/leftarrow.png" id="goback">
+                    <p id="finestitle">ACTA DE DENUNCIA</p>
+                    <hr>
+                </div>
+                <div id="finestitlecontainer">
+                    <p id="finespersonname">SUJETO: {{ person.firstname.toUpperCase() }} {{ person.lastname.toUpperCase() }}</p>
+                    <input v-on:keyup="Filter()" type="text" placeholder="BUSCAR DELITO" id="filterfines"></input>
+                </div>
+                <div id="availablefinestitle">
+                    <p>CARGOS</p>
+                    <p>MULTA</p>
+                </div>
+                <div id="availablefinescontainer">
+                    <table v-for="fine in all_fines" id="availablefines">
+                        <tr>
+                            <td style="width: 46%; min-width: 104px;">{{ fine.label }}</td>
+                            <td style="width: 29%; min-width: 29%;">{{ fine.jailtime }} meses ${{ fine.amount }}</td>
+                            <td v-on:click="AddFine(person.identifier, person.name, fine)" style="width: 25%; min-width: 25%;"><button id="addfinebutton">AÑADIR</button></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+
+            <!-- NOTES -->
+            <div v-if="page == 'Notes'" v-for="person in selected_person.result" id="notespagecontainer">
+                <div id="title" class="title">
+                    <img v-on:click="SearchProfile(person.identifier); create_note = false" src="./imgs/leftarrow.png" id="goback">
+                    <p>NOTAS</p>
+                    <hr>
+                </div>
+                <div id="finestitlecontainer">
+                    <p id="finespersonname">SUJETO: {{ person.firstname.toUpperCase() }} {{ person.lastname.toUpperCase() }}</p>
+                </div>
+                <div id="notescontainer">
+                    <div v-if="create_note" id="createnote">
+                        <button v-on:click="CreateNote(person.identifier, person.firstname, person.lastname); create_note = false; ClearForm()" id="submitnote">ENVIAR</button>
+                        <hr>
+                        <textarea v-model="new_note" type="text" placeholder="INTRODUCE EL TEXTO DE LA NOTA" id="noteinput"></textarea>
+                    </div>
+                    <div v-for="note in selected_person.notes" id="readnote">
+                        <p id="notetitle">AGENTE: {{ note.agent.toUpperCase() }}</p>
+                        <button v-on:click="ChangePage('LoadingScreen'); RemoveNote(note)" id="deletenote">X</button>
+                        <p id="notetitle">FECHA: {{ note.date }}</p>
+                        <hr>
+                        <p id="notetext">{{ note.note }}</p>
+                    </div>
+                    <div id="notesfooter">
+                        <button v-on:click="create_note = true" id="newnote">NUEVA NOTA</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NOTES TEST -->
+            <div v-if="page == 'NotesTest'" id="notespagecontainer">
+                <div id="title" class="title">
+                    <img v-on:click="SearchProfile(person.identifier)" src="./imgs/leftarrow.png" id="goback">
+                    <p>NOTAS</p>
+                    <hr>
+                </div>
+                <div id="finestitlecontainer">
+                    <p id="finespersonname">SUJETO: PEP PALOS</p>
+                </div>
+                <div id="datasheetcontainer">
+                    <div id="datasheet">
+                        <p id="datasheettitle">NOMBRE Y APELLIDOS</p>
+                        <p id="datasheettext">Pep Palos</p>
+                    </div>
+                    
+                    
+                    <div id="bills">
+                        <p id="billtitle">ANTECEDENTES</p>
+                    </div>
+                </div>
+                <div id="datasheetfooter">
+                    <button v-on:click="RequestAllFines()" id="addbillbutton">AÑADIR MULTA</button>
+                    <div class="verticalline"></div>
+                    <button v-on:click="RequestNotes(person.identifier)" id="addNote">NOTAS</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="app.js"></script>
+
+</html>
