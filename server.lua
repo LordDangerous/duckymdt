@@ -172,7 +172,7 @@ end)
 RegisterNetEvent('duckymdt:requestAllFines')
 AddEventHandler('duckymdt:requestAllFines', function ()
     local _source = source
-    local fines = MySQL.Sync.fetchAll("SELECT * FROM `fine_types")
+    local fines = MySQL.Sync.fetchAll("SELECT * FROM `fine_types`")
     TriggerClientEvent('duckymdt:returnAllFines', _source, fines)
 end)
 
