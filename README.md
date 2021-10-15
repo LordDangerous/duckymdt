@@ -18,5 +18,3 @@ You'll need basic ESX framework and some other specific detailed in the github.
 **Usage**
 
 Press "Page Down" to open and close it or use "/mdt" in chat.
-
-```a adaw ```
